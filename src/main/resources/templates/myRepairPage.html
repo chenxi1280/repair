@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
+<link rel="stylesheet" href="../../layuiadmin/style/admin.css" media="all">
+
+<script type="text/javascript" src="../../layuiadmin/layui/layui.js"></script>
+
+<style>
+    /*修改layui表格的高度*/
+    .layui-table-cell {
+        height: auto;
+    }
+</style>
+<body class="layui-card-body layui-card">
+<div style="padding: 10px;" class="layui-card">
+    <table id="artWorkTable" lay-filter="artWorkTableFilter" style="padding-top: 10px"></table>
+    <!--        <div th:include="plugins/splitBar::splitBar"></div>-->
+
+</div>
+
+
+
+<!--// 加上th:inline='javascript' 否则可能会因为小于或者大于符号导致 thymeleaf模板引擎解析错误。-->
+<script th:inline="javascript" type="text/javascript">
+
+    layui.use(['table', 'layer', 'laydate', 'form'], function () {
+        var table = layui.table;
+        var layer = layui.layer;
+        var laydate = layui.laydate;
+        var $ = layui.$;
+        laydate.render({
+            elem: '#creteDateRange' //指定元素
+            , range: '至'
+        });
+
+        var artWorkTable = table.render({
+            elem: '#artWorkTable'
+            , page: true
+            , url: 'rapair/ajaxMyList' //数据接口
+            , cols: [[ //表头
+                , {field: '', title: '作品ID', width: 120}
+                , {field: '', title: '作者ID', width: 120}
+                , {field: '', title: '作者', width: 120}
+                , {field: '', title: '作品名字', width: 120}
+                , {field: '', title: '描述', width: 140}
+                , {field: '', title: '分类', width: 140}
+                , {
+                    field: '', title: '状态', width: 90, templet: function (d) {
+
+                        if (d.artworkStatus == "0") {
+                            return '<div >' +
+                                '<button class="layui-btn layui-btn-normal  layui-btn-xs" lay-event="lock">草 稿</button>' +
+                                '</div>'
+                        }else if (d.artworkStatus == "1"){
+                            return '<div >' +
+                                '<button class="layui-btn layui-btn-warm  layui-btn-xs" lay-event="lock">待审核</button>' +
+                                '</div>'
+                        }else if (d.artworkStatus == "2"){
+                            return '<div >' +
+                                '<button class="layui-btn  layui-btn-xs" lay-event="lock">审核通过</button>' +
+                                '</div>'
+                        }else if (d.artworkStatus == "3"){
+                            return '<div >' +
+                                '<button class="layui-btn layui-btn-danger layui-btn-xs" lay-event="lock">审核不通过</button>' +
+                                '</div>'
+                        }else if (d.artworkStatus == "4"){
+                            return '<div >' +
+                                '<button class="layui-btn layui-btn-danger layui-btn-xs" lay-event="lock">已发布</button>' +
+                                '</div>'
+                        }else if (d.artworkStatus == "5"){
+                            return '<div >' +
+                                '<button class="layui-btn layui-btn-danger layui-btn-xs" lay-event="lock">删 除</button>' +
+                                '</div>'
+                        }
+
+                    }
+                }
+            ]]
+            , toolbar: 'default'
+
+        });
+
+
+
+
+    })
+
+</script>
+
+
+</body>
+
+
+</html>
