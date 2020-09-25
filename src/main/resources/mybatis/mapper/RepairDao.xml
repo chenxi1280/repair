@@ -158,14 +158,17 @@
 
 <!--  sql-->
 
-  <select id="ajaxMyList" resultType="com.computer.repair.pojo.vo.RepairVO">
+
+  <select id="ajaxMyListCount" resultType="java.lang.Integer">
+    select count(*)
+    from repair
+    where  `uid` = #{userId}
+  </select>
+  <select id="ajaxMyList" resultType="com.computer.repair.pojo.entity.Repair">
     select <include refid="Base_Column_List" />
     from repair
-    where  `uid` = #{uId}
-
-
+    where `uid` = #{userId}
   </select>
-
 
 
 </mapper>

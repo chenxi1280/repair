@@ -3,6 +3,7 @@ package com.computer.repair.service.impl;
 import com.computer.repair.dao.RepairDao;
 import com.computer.repair.pojo.dto.PageDTO;
 import com.computer.repair.pojo.dto.ResponseDTO;
+import com.computer.repair.pojo.entity.Repair;
 import com.computer.repair.pojo.entity.User;
 import com.computer.repair.pojo.query.RepairQuery;
 import com.computer.repair.pojo.vo.RepairVO;
@@ -20,8 +21,6 @@ public class RepairServiceImpl implements RepairService, BaseService {
     @Resource
     RepairDao repairDao;
 
-
-
     @Override
     public ResponseDTO add(RepairVO repairVO) {
         repairVO.setCreateTime(new Date());
@@ -34,7 +33,8 @@ public class RepairServiceImpl implements RepairService, BaseService {
     public PageDTO ajaxMyList(RepairQuery repairQuery) {
         User user = (User) getRequstSession().getAttribute("user");
         repairQuery.setUserId(user.getUserId());
-        List<RepairVO> repairVOS = repairDao.ajaxMyList(repairQuery);
-        return PageDTO.setPageData(repairVOS.size(),repairVOS);
+        List<Repair> repairVOS = repairDao.ajaxMyList(repairQuery);
+        Integer count = repairDao.ajaxMyListCount(repairQuery);
+        return PageDTO.setPageData(count,repairVOS);
     }
 }

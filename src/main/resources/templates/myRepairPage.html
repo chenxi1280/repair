@@ -37,16 +37,18 @@
         var artWorkTable = table.render({
             elem: '#artWorkTable'
             , page: true
-            , url: 'rapair/ajaxMyList' //数据接口
+            , url: 'repair/ajaxMyList' //数据接口
             , cols: [[ //表头
-                , {field: '', title: '作品ID', width: 120}
-                , {field: '', title: '作者ID', width: 120}
-                , {field: '', title: '作者', width: 120}
-                , {field: '', title: '作品名字', width: 120}
-                , {field: '', title: '描述', width: 140}
-                , {field: '', title: '分类', width: 140}
+                , {field: 'computerName', title: '电脑名字', width: 120}
+                , {field: 'createTime', title: '创建时间', width: 120}
+                , {field: 'updataTime', title: '更新时间', width: 120}
+                , {field: 'endingTime', title: '最后完成时间', width: 140}
+                , {field: 'content', title: '描述', width: 120}
+                , {field: 'rTitile', title: '标题', width: 140}
+                , {field: 'phoneNumber', title: '电话号码', width: 140}
+                , {field: 'address', title: '地址', width: 140}
                 , {
-                    field: '', title: '状态', width: 90, templet: function (d) {
+                    field: 'status', title: '状态', width: 90, templet: function (d) {
 
                         if (d.artworkStatus == "0") {
                             return '<div >' +

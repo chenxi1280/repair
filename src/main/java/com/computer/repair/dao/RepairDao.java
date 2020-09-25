@@ -2,7 +2,6 @@ package com.computer.repair.dao;
 
 import com.computer.repair.pojo.entity.Repair;
 import com.computer.repair.pojo.query.RepairQuery;
-import com.computer.repair.pojo.vo.RepairVO;
 
 import java.util.List;
 
@@ -19,5 +18,7 @@ public interface RepairDao {
 
     int updateByPrimaryKey(Repair record);
 
-    List<RepairVO> ajaxMyList(RepairQuery repairQuery);
+    List<Repair> ajaxMyList(RepairQuery repairQuery);
+
+    Integer ajaxMyListCount(RepairQuery repairQuery);
 }

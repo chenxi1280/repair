@@ -6,9 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
-
 @EnableTransactionManagement
-@MapperScan("com.computer.repair.dao")
+@MapperScan(basePackages ="com.computer.repair.dao")
 public class RepairApplication {
 
     public static void main(String[] args) {

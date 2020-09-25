@@ -15,7 +15,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-@RequestMapping("/back/rapair")
+@RequestMapping("/back/repair")
 public class RepairController extends  BaseController{
 
     @Resource
